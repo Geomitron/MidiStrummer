@@ -19,7 +19,10 @@ func _input(event: InputEvent) -> void:
 
 	var pitch: int = event.pitch
 	if !_is_pitch_in_bounds(pitch):
-		return
+		while pitch < OPEN_STRING_PITCHES[0]:
+			pitch += 12
+		while pitch > OPEN_STRING_PITCHES[5] + HIGHEST_FRET:
+			pitch -= 12
 
 	var possible_notes := _get_possible_notes(pitch)
 	var note := _get_best_note(possible_notes)
